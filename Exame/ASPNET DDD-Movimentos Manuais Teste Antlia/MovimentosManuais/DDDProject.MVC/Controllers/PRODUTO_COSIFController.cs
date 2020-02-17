@@ -10,102 +10,106 @@ using MovimentosManuaisTeste.Models;
 
 namespace MovimentosManuaisTeste.Controllers
 {
-    public class ProdutoController : Controller
+    public class PRODUTO_COSIFController : Controller
     {
         private Antlia_DBEntities db = new Antlia_DBEntities();
 
-        // GET: Produto
+        // GET: PRODUTO_COSIF
         public ActionResult Index()
         {
-            return View(db.Produto.ToList());
+            var pRODUTO_COSIF = db.PRODUTO_COSIF.Include(p => p.Produto);
+            return View(pRODUTO_COSIF.ToList());
         }
 
-        // GET: Produto/Details/5
+        // GET: PRODUTO_COSIF/Details/5
         public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produto.Find(id);
-            if (produto == null)
+            PRODUTO_COSIF pRODUTO_COSIF = db.PRODUTO_COSIF.Find(id);
+            if (pRODUTO_COSIF == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(pRODUTO_COSIF);
         }
 
-        // GET: Produto/Create
+        // GET: PRODUTO_COSIF/Create
         public ActionResult Create()
         {
+            ViewBag.COD_PRODUTO = new SelectList(db.Produto, "COD_PRODUTO", "DES_PRODUTO");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "COD_PRODUTO,DES_PRODUTO,STA_STATUS")] Produto produto)
+        public ActionResult Create([Bind(Include = "COD_PRODUTO,COD_COSIF,COD_CLASSIFICACAO,STA_STATUS")] PRODUTO_COSIF pRODUTO_COSIF)
         {
             if (ModelState.IsValid)
             {
-                db.Produto.Add(produto);
+                db.PRODUTO_COSIF.Add(pRODUTO_COSIF);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(produto);
+            ViewBag.COD_PRODUTO = new SelectList(db.Produto, "COD_PRODUTO", "DES_PRODUTO", pRODUTO_COSIF.COD_PRODUTO);
+            return View(pRODUTO_COSIF);
         }
 
-        // GET: Produto/Edit/5
+        // GET: PRODUTO_COSIF/Edit/5
         public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produto.Find(id);
-            if (produto == null)
+            PRODUTO_COSIF pRODUTO_COSIF = db.PRODUTO_COSIF.Find(id);
+            if (pRODUTO_COSIF == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            ViewBag.COD_PRODUTO = new SelectList(db.Produto, "COD_PRODUTO", "DES_PRODUTO", pRODUTO_COSIF.COD_PRODUTO);
+            return View(pRODUTO_COSIF);
         }
 
-      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "COD_PRODUTO,DES_PRODUTO,STA_STATUS")] Produto produto)
+        public ActionResult Edit([Bind(Include = "COD_PRODUTO,COD_COSIF,COD_CLASSIFICACAO,STA_STATUS")] PRODUTO_COSIF pRODUTO_COSIF)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(produto).State = EntityState.Modified;
+                db.Entry(pRODUTO_COSIF).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(produto);
+            ViewBag.COD_PRODUTO = new SelectList(db.Produto, "COD_PRODUTO", "DES_PRODUTO", pRODUTO_COSIF.COD_PRODUTO);
+            return View(pRODUTO_COSIF);
         }
 
-        // GET: Produto/Delete/5
+        // GET: PRODUTO_COSIF/Delete/5
         public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produto.Find(id);
-            if (produto == null)
+            PRODUTO_COSIF pRODUTO_COSIF = db.PRODUTO_COSIF.Find(id);
+            if (pRODUTO_COSIF == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(pRODUTO_COSIF);
         }
 
-        // POST: Produto/Delete/5
+        // POST: PRODUTO_COSIF/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Produto produto = db.Produto.Find(id);
-            db.Produto.Remove(produto);
+            PRODUTO_COSIF pRODUTO_COSIF = db.PRODUTO_COSIF.Find(id);
+            db.PRODUTO_COSIF.Remove(pRODUTO_COSIF);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

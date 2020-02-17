@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DDDProject.MVC.Controllers
+namespace MovimentosManuaisTeste.Controllers
 {
     public class HomeController : Controller
     {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MovimentosManuaisTeste.Models.Produto>
+﻿@model IEnumerable<MovimentosManuaisTeste.Models.prSelecionaProducoCosif_Result>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.DES_PRODUTO)
+            @Html.DisplayNameFor(model => model.COD_COSIF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.COD_CLASSIFICACAO)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.STA_STATUS)
@@ -23,7 +26,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.DES_PRODUTO)
+            @Html.DisplayFor(modelItem => item.COD_COSIF)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.COD_CLASSIFICACAO)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.STA_STATUS)
