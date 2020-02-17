@@ -1,0 +1,73 @@
+﻿@model IEnumerable<DDDProject.MVC.ViewModels.ProdutoViewModel>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h3>Antlia - ASP.NET </h3>
+    <p class="lead"> Carlos Gomes</p>
+    <p><a href="http://servicosti.com.br/" class="btn btn-primary btn-lg">Conheça o meu sistema ST (ERP)  &raquo;</a></p>
+</div>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <span>Mes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> @Html.TextBox("CustomerName")
+
+
+        <span>Ano</span> @Html.TextBox("CustomerName")
+        <br />
+        <span>Produto&nbsp;</span>
+
+        <select id="uf" style="width:15%;" name="uf">
+            <option value="" selected></option>
+            <option value="">Teste</option>
+        </select>
+        <span>Cosif</span>
+        <select id="uf" style="width:15%;" name="uf">
+            <option value="" selected></option>
+            <option value="">Teste2</option>
+        </select>
+        <br />
+        <span>Valor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> @Html.TextBox("CustomerName")
+        <br />
+        <span>Descrição</span>
+        <textarea></textarea>
+        <br />
+
+        <table cellpadding="0" cellspacing="0"><br />
+            <tr>
+                <th>Mês |</th>
+                <th>Ano |</th>
+                <th>Cod Produto |</th>
+                <th>Desc Produto</th>
+            </tr>
+            <br />
+            @*@foreach (Customer customer in Model)
+                {*@
+            <tr>
+                <td>02</td>
+                <td>2020</td>
+                <td>Teste</td>
+                <td>Almofadas</td>
+
+            </tr>
+            @* }*@
+
+            <input type="submit" value="Limpar" />
+            <input type="submit" value="Novo" />
+            <input type="submit" value="Incluir" />
+            <br />
+        </table>
+        <br />
+    }
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AntliaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prInserirMovimentosManuais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="COD_PRODUTO" Type="char" Mode="In" />
+          <Parameter Name="COD_COSIF" Type="varchar" Mode="In" />
+          <Parameter Name="DAT_ANO" Type="int" Mode="In" />
+          <Parameter Name="DAT_MES" Type="int" Mode="In" />
+          <Parameter Name="NUM_LANCAMENTO" Type="int" Mode="In" />
+          <Parameter Name="VAL_VALOR" Type="float" Mode="In" />
+          <Parameter Name="DES_DESCRICAO" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="DAT_MOVIMENTO" Type="datetime" Mode="In" />
+          <Parameter Name="COD_USUARIO" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="prInserirProdutos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="COD_PRODUTO" Type="char" Mode="In" />
+          <Parameter Name="DES_PRODUTO" Type="varchar" Mode="In" />
+          <Parameter Name="STA_STATUS" Type="char" Mode="In" />
+        </Function>
+        <Function Name="prProdutos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="COD_PRODUTO" Type="char" Mode="In" />
+          <Parameter Name="DES_PRODUTO" Type="varchar" Mode="In" />
+          <Parameter Name="STA_STATUS" Type="char" Mode="In" />
+        </Function>
+        <Function Name="prSelecionaMOVIMENTO_MANUAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prSelecionaProducoCosif" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SelecionaProduto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="AntliaDBModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AntliaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TesteAntliaDBEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="prInserirMovimentosManuais">
+            <Parameter Name="COD_PRODUTO" Mode="In" Type="String" />
+            <Parameter Name="COD_COSIF" Mode="In" Type="String" />
+            <Parameter Name="DAT_ANO" Mode="In" Type="Int32" />
+            <Parameter Name="DAT_MES" Mode="In" Type="Int32" />
+            <Parameter Name="NUM_LANCAMENTO" Mode="In" Type="Int32" />
+            <Parameter Name="VAL_VALOR" Mode="In" Type="Double" />
+            <Parameter Name="DES_DESCRICAO" Mode="In" Type="String" />
+            <Parameter Name="DAT_MOVIMENTO" Mode="In" Type="DateTime" />
+            <Parameter Name="COD_USUARIO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prInserirProdutos">
+            <Parameter Name="COD_PRODUTO" Mode="In" Type="String" />
+            <Parameter Name="DES_PRODUTO" Mode="In" Type="String" />
+            <Parameter Name="STA_STATUS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prProdutos">
+            <Parameter Name="COD_PRODUTO" Mode="In" Type="String" />
+            <Parameter Name="DES_PRODUTO" Mode="In" Type="String" />
+            <Parameter Name="STA_STATUS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prSelecionaMOVIMENTO_MANUAL" ReturnType="Collection(AntliaDBModel.prSelecionaMOVIMENTO_MANUAL_Result)" />
+          <FunctionImport Name="prSelecionaProducoCosif" ReturnType="Collection(AntliaDBModel.prSelecionaProducoCosif_Result)" />
+          <FunctionImport Name="SelecionaProduto" ReturnType="Collection(AntliaDBModel.SelecionaProduto_Result)" />
+        </EntityContainer>
+        <ComplexType Name="prSelecionaMOVIMENTO_MANUAL_Result">
+          <Property Type="String" Name="COD_COSIF" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DAT_MES" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="DAT_ANO" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="COD_PRODUTO" Nullable="false" MaxLength="4" />
+          <Property Type="Int32" Name="NUM_LANCAMENTO" Nullable="false" />
+          <Property Type="String" Name="DES_DESCRICAO" Nullable="true" />
+          <Property Type="Double" Name="VAL_VALOR" Nullable="false" />
+          <Property Type="DateTime" Name="DAT_MOVIMENTO" Nullable="false" Precision="23" />
+          <Property Type="String" Name="COD_USUARIO" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="prSelecionaProducoCosif_Result">
+          <Property Type="String" Name="COD_PRODUTO" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="COD_COSIF" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="COD_CLASSIFICACAO" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="STA_STATUS" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="SelecionaProduto_Result">
+          <Property Type="String" Name="COD_PRODUTO" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="DES_PRODUTO" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="STA_STATUS" Nullable="true" MaxLength="1" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AntliaDBModelStoreContainer" CdmEntityContainer="TesteAntliaDBEntities" >
+          <FunctionImportMapping FunctionImportName="prInserirMovimentosManuais" FunctionName="AntliaDBModel.Store.prInserirMovimentosManuais" />
+          <FunctionImportMapping FunctionImportName="prInserirProdutos" FunctionName="AntliaDBModel.Store.prInserirProdutos" />
+          <FunctionImportMapping FunctionImportName="prProdutos" FunctionName="AntliaDBModel.Store.prProdutos" />
+          <FunctionImportMapping FunctionImportName="prSelecionaMOVIMENTO_MANUAL" FunctionName="AntliaDBModel.Store.prSelecionaMOVIMENTO_MANUAL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AntliaDBModel.prSelecionaMOVIMENTO_MANUAL_Result">
+                <ScalarProperty Name="COD_COSIF" ColumnName="COD_COSIF" />
+                <ScalarProperty Name="DAT_MES" ColumnName="DAT_MES" />
+                <ScalarProperty Name="DAT_ANO" ColumnName="DAT_ANO" />
+                <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
+                <ScalarProperty Name="NUM_LANCAMENTO" ColumnName="NUM_LANCAMENTO" />
+                <ScalarProperty Name="DES_DESCRICAO" ColumnName="DES_DESCRICAO" />
+                <ScalarProperty Name="VAL_VALOR" ColumnName="VAL_VALOR" />
+                <ScalarProperty Name="DAT_MOVIMENTO" ColumnName="DAT_MOVIMENTO" />
+                <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prSelecionaProducoCosif" FunctionName="AntliaDBModel.Store.prSelecionaProducoCosif">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AntliaDBModel.prSelecionaProducoCosif_Result">
+                <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
+                <ScalarProperty Name="COD_COSIF" ColumnName="COD_COSIF" />
+                <ScalarProperty Name="COD_CLASSIFICACAO" ColumnName="COD_CLASSIFICACAO" />
+                <ScalarProperty Name="STA_STATUS" ColumnName="STA_STATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelecionaProduto" FunctionName="AntliaDBModel.Store.SelecionaProduto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AntliaDBModel.SelecionaProduto_Result">
+                <ScalarProperty Name="COD_PRODUTO" ColumnName="COD_PRODUTO" />
+                <ScalarProperty Name="DES_PRODUTO" ColumnName="DES_PRODUTO" />
+                <ScalarProperty Name="STA_STATUS" ColumnName="STA_STATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

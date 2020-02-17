@@ -1,0 +1,171 @@
+USE [AntliaDB]
+GO
+
+
+/****** Object:  Table [dbo].[Produto]   ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Produto](
+	[COD_PRODUTO] [nvarchar](4) NOT NULL,
+	[DES_PRODUTO] [nvarchar](30) NULL,
+	[STA_STATUS] [nvarchar](1) NULL,
+ CONSTRAINT [PK_dbo.Produto] PRIMARY KEY CLUSTERED 
+(
+	[COD_PRODUTO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[MOVIMENTO_MANUAL]    ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[MOVIMENTO_MANUAL](
+	[COD_PRODUTO] [nvarchar](4) NOT NULL,
+	[COD_COSIF] [nvarchar](30) NOT NULL,
+	[DAT_ANO] [int] NOT NULL,
+	[DAT_MES] [int] NOT NULL,
+	[NUM_LANCAMENTO] [int] NOT NULL,
+	[VAL_VALOR] [float] NOT NULL,
+	[DES_DESCRICAO] [nvarchar](max) NULL,
+	[DAT_MOVIMENTO] [datetime] NOT NULL,
+	[COD_USUARIO] [nvarchar](100) NULL,
+ CONSTRAINT [PK_dbo.MOVIMENTO_MANUAL] PRIMARY KEY CLUSTERED 
+(
+	[COD_PRODUTO] ASC,
+	[COD_COSIF] ASC,
+	[DAT_ANO] ASC,
+	[DAT_MES] ASC,
+	[NUM_LANCAMENTO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[MOVIMENTO_MANUAL]  WITH CHECK ADD  CONSTRAINT [FK_dbo.MOVIMENTO_MANUAL_dbo.PRODUTO_COSIF_COD_PRODUTO_COD_COSIF] FOREIGN KEY([COD_PRODUTO], [COD_COSIF])
+REFERENCES [dbo].[PRODUTO_COSIF] ([COD_PRODUTO], [COD_COSIF])
+GO
+
+ALTER TABLE [dbo].[MOVIMENTO_MANUAL] CHECK CONSTRAINT [FK_dbo.MOVIMENTO_MANUAL_dbo.PRODUTO_COSIF_COD_PRODUTO_COD_COSIF]
+GO
+
+
+
+
+/****** Object:  Table [dbo].[PRODUTO_COSIF]  ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PRODUTO_COSIF](
+	[COD_PRODUTO] [nvarchar](4) NOT NULL,
+	[COD_COSIF] [nvarchar](30) NOT NULL,
+	[COD_CLASSIFICACAO] [nvarchar](6) NULL,
+	[STA_STATUS] [nvarchar](1) NULL,
+ CONSTRAINT [PK_dbo.PRODUTO_COSIF] PRIMARY KEY CLUSTERED 
+(
+	[COD_PRODUTO] ASC,
+	[COD_COSIF] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[PRODUTO_COSIF]  WITH CHECK ADD  CONSTRAINT [FK_dbo.PRODUTO_COSIF_dbo.Produto_COD_PRODUTO] FOREIGN KEY([COD_PRODUTO])
+REFERENCES [dbo].[Produto] ([COD_PRODUTO])
+GO
+
+ALTER TABLE [dbo].[PRODUTO_COSIF] CHECK CONSTRAINT [FK_dbo.PRODUTO_COSIF_dbo.Produto_COD_PRODUTO]
+GO
+
+
+
+create procedure prSelecionaMOVIMENTO_MANUAL
+as
+select 
+	MM.COD_COSIF,
+    convert(char(2), MM.DAT_MES, 101)DAT_MES,
+	convert(char(4), MM.DAT_ANO, 102) DAT_ANO,
+	p.COD_PRODUTO,
+	MM.NUM_LANCAMENTO,
+	MM.DES_DESCRICAO,
+	MM.VAL_VALOR,
+	MM.DAT_MOVIMENTO,
+	MM.COD_USUARIO
+from MOVIMENTO_MANUAL MM
+ join produto p on p.COD_PRODUTO=mm.COD_PRODUTO
+
+
+
+create procedure prInserirMovimentosManuais
+(
+	 @COD_PRODUTO char(4)
+	,@COD_COSIF varchar(30)
+	,@DAT_ANO int
+	,@DAT_MES int
+	,@NUM_LANCAMENTO int
+	,@VAL_VALOR float
+	,@DES_DESCRICAO nvarchar(max)
+	,@DAT_MOVIMENTO datetime
+	,@COD_USUARIO nvarchar(100)
+)
+as
+
+if @NUM_LANCAMENTO = '' or @NUM_LANCAMENTO = null
+begin 
+   set @NUM_LANCAMENTO = 1
+end
+
+begin
+INSERT INTO dbo.MOVIMENTO_MANUAL
+           (COD_PRODUTO
+           ,COD_COSIF
+           ,DAT_ANO
+           ,DAT_MES
+           ,NUM_LANCAMENTO
+           ,VAL_VALOR
+           ,DES_DESCRICAO
+           ,DAT_MOVIMENTO
+           ,COD_USUARIO)
+     VALUES
+           ('Teste'
+           ,@COD_COSIF
+           ,@DAT_ANO
+           ,@DAT_MES
+           ,@NUM_LANCAMENTO + 1
+           ,@VAL_VALOR
+           ,@DES_DESCRICAO
+           ,getdate()
+           ,@COD_USUARIO)
+end
+GO
+
+
+
+--usarei para montar os combos 
+create proc prInserirProdutos
+(
+	@COD_PRODUTO char(4),
+	@DES_PRODUTO varchar(30),
+	@STA_STATUS char(1)
+)
+as
+INSERT INTO Produto (COD_PRODUTO,DES_PRODUTO,STA_STATUS)
+     VALUES (@COD_PRODUTO ,@DES_PRODUTO,@STA_STATUS)
+
+	 
+create proc prSelecionaProducoCosif
+as
+select * from PRODUTO_COSIF
+
+
+create proc SelecionaProduto
+as
+select * from Produto
