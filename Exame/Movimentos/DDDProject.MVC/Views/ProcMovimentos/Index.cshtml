@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DDDProject.MVC.prSelecionaMOVIMENTO_MANUAL_Result>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Configuração - Movimentos</h2>
+
+<form method="get" id="envio" autocomplete="on">
+    <table align="center" name="contatos" id="contatos">
+
+        <tr>
+            <td style="color: #000080; font-family: Arial; font-size: 12px">Mês</td>
+            <td> <input type="text" name="mes" id="mes" /> </td>
+        </tr>
+
+        <tr>
+            <td style="color: #000080; font-family: Arial; font-size: 12px">Ano</td>
+            <td> <input type="text" name="ano" id="ano" /></td>
+        </tr>
+
+        <tr>
+            <td>Cosif :</td>
+            <td>
+                <select onchange="esconde_esconde(this);">
+                    <option value="">Selecione</option>
+                    <option value="1">Teste</option>
+                    <option value="2">1</option>
+                    <option value="3">2</option>
+                </select>
+            </td>
+            <td>Produto :</td>
+            <td>
+                <select onchange="esconde_esconde(this);">
+                    <option value="">Selecione</option>
+                    <option value="1">Teste1</option>
+                    <option value="2">1</option>
+                    <option value="3">2</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td style="color: #000080; font-family: Arial; font-size: 12px">Valor</td>
+            <td> <input type="text" name="val" id="val" /></td>
+        </tr>
+
+       
+        <tr>
+            <td style="color: #000080; font-family: Arial; font-size: 12px">Descrição :</td>
+            <td>
+                <textarea id="msg" title="Escreva sua descrição aqui!" cols="35" rows="8">
+                     </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <input type="submit" class="css_blue" value="Enviar" onclick="Contato_Enviar();" /></td>
+        </tr>
+
+    </table>
+</form>
+
