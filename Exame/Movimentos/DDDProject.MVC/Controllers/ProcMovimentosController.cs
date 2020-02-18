@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,16 +15,27 @@ namespace DDDProject.MVC.Controllers
             return View();
         }
 
-        // GET: ProcMovimentos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: ProcMovimentos/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                // TODO: configurar
+                //prSelecionaMOVIMENTO_MANUAL_Result db = new prSelecionaMOVIMENTO_MANUAL_Result();
+                //SqlParameter param1 = new SqlParameter("@COD_PRODUTO", COD_PRODUTO);
+                //SqlParameter param2 = new SqlParameter("@COD_COSIF", COD_COSIF);
+                //SqlParameter param3 = new SqlParameter("@NUM_LANCAMENTO", NUM_LANCAMENTO);
+                //// var data = db.Database.SqlQuery("exec prSelecionaMOVIMENTO_MANUAL_Result @COD_PRODUTO ,@COD_COSIF,@NUM_LANCAMENTO ", param1, param2, param3).SingleOrDefault();
+                /////continuar ....
+                /////
+                ////return View(data);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // POST: ProcMovimentos/Create
@@ -42,48 +54,7 @@ namespace DDDProject.MVC.Controllers
             }
         }
 
-        // GET: ProcMovimentos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProcMovimentos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProcMovimentos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProcMovimentos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        
         }
     }
-}
+
