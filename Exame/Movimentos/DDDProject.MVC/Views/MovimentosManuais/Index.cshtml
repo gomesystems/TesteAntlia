@@ -1,0 +1,132 @@
+﻿@model DDDProject.MVC.Model.MovimentosManuaisProc
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Configuração - Movimentos</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="mes" class="control-label"></label>
+                <input asp-for="mes" class="form-control" />
+                <span asp-validation-for="mes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ano" class="control-label"></label>
+                <input asp-for="ano" class="form-control" />
+                <span asp-validation-for="ano" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="produto" class="form-control">
+                    <option value="">-- Selecione Produto --</option>
+                    <option value="Teste">Teste</option>
+                    <option value="Teste">teste</option>
+                </select>
+                <span asp-validation-for="produto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cosif" class="control-label"></label>
+                <select asp-for="cosif" class="form-control">
+                    <option value="">-- Selecione Cosif --</option>
+                    <option value="cosif">Teste</option>
+                    <option value="cosif">teste2</option>
+                </select>
+                <span asp-validation-for="Cosif" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Valor" class="control-label"></label>
+                <input asp-for="Valor" class="form-control" />
+                <span asp-validation-for="Valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+@*
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                  Cosif
+                </th>
+                <th>
+                   Produto
+                </th>
+                <th>
+                   Usuario
+                </th>
+                <th>
+                    Ano
+                </th>
+
+                <th>
+                  Mes
+                </th>
+                <th>
+                 Valor
+                </th>
+                <th>
+                  Data Movimento
+                </th>
+                <th>
+                 Usuário
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach (var item in Model
+                )
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COD_COSIF)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COD_PRODUTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COD_USUARIO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DAT_ANO)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DAT_MES)
+                    </td>
+                    <td>
+                    @Html.DisplayFor(modelItem => item.VAL_VALOR)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DAT_MOVIMENTO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.COD_USUARIO)
+                    </td>
+
+                </tr>
+
+           // }
+        </tbody>
+    </table>
+*@
+
